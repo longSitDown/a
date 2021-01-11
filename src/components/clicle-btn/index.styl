@@ -1,0 +1,64 @@
+@import '../../common/style/global.styl'
+$bgBtn=rgba(96,150,230,1)
+$fsizeBigBtn=24px
+$fsizeBtn=14px
+$rotate=45deg
+$btnW=50px
+$bigBtnW=100px
+$interval=20px //间隔
+
+.c-wrap
+    pos-a()
+    size $bigBtnW
+    color: #fff
+    user-select: none
+
+    .title
+        border-radius 50%
+        background-color $bgBtn
+        size $bigBtnW
+        @extend .center
+        pos-a()
+        font-weight 700
+        font-size $fsizeBigBtn
+        z-index 10
+    ul 
+        pos-a 50px 50px
+        li
+            size $btnW
+            border-radius 50%
+            background-color $bgBtn
+            padding: 0 12px
+            box-sizing: border-box
+            text-align: center
+            @extend .center
+            font-weight 500
+            font-size: $fsizeBtn
+            transform-origin: -70px;
+            // transform: rotate(180deg);
+            pos-a -(@height/2),none,none,-(@width/2) 
+            transition: all 1s
+            
+        
+for site in 0 1 2 3 
+    .active-{site}
+        ul
+            li
+                top -($btnW/2)
+                left ($bigBtnW/2+$interval)
+        for de in 0 1 2 3 4
+            li:nth-child({de+1})
+                transform: rotate($rotate*de+90deg*site)
+                span 
+                    transform: rotate(-($rotate*de+90deg*site))
+        
+.active
+    ul
+        li
+            top -($btnW/2)
+            left ($bigBtnW/2+$interval)
+    for deg in 0 1 2 3 4 
+        li:nth-child({deg+1})
+            transform: rotate($rotate*deg)
+            span 
+                transform: rotate(- $rotate*deg)
